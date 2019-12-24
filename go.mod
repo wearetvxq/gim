@@ -10,6 +10,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.2
 	github.com/golang/snappy v0.0.1
+	github.com/gorilla/websocket v1.4.1
 	github.com/json-iterator/go v1.1.7
 	github.com/mattn/go-isatty v0.0.7
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
@@ -28,6 +29,7 @@ require (
 	golang.org/x/text v0.3.2 // indirect
 	golang.org/x/tools v0.0.0-20190606124116-d0a3d012864b // indirect
 	google.golang.org/appengine v1.4.0
+	google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55
 	google.golang.org/grpc v1.25.1
 	gopkg.in/go-playground/validator.v8 v8.18.2
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0-20170531160350-a96e63847dc3

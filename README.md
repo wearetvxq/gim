@@ -1,37 +1,46 @@
 ### 简要介绍
 gim是一个即时通讯服务器，代码全部使用golang完成。主要功能  
-1.离线消息同步  
-2.多业务接入  
-3.单用户多设备同时在线    
-4.单聊，群聊，以及超大群聊天场景  
-5.支持服务水平扩展
+1.支持tcp，websocket接入  
+2.离线消息同步  
+3.多业务接入  
+4.单用户多设备同时在线    
+5.单聊，群聊，以及超大群聊天场景  
+6.支持服务水平扩展
 ### 使用技术：
 数据库：Mysql+Redis  
 组件：grpc+jsoniter+zap  
 ### 安装部署
 1.首先安装MySQL，Redis  
-2.创建数据库gim，执行sql/create_table.sql，完成初始化表的创建  
-3.下载代码到你本地  
-4.修改conf/conf.go配置文件，使之和你本地配置一致  
-5.分别切换到app的connect和logic目录下，执行go run main.go,启动连接层服务器和逻辑层服务器  
-6.切换到test目录下，启动测试脚本  
-7.使用public/util/aes.go的GetToken获取token  
-8.使用rpc接口发送消息
+2.创建数据库gim，执行sql/create_table.sql，完成初始化表的创建（数据库包含提供测试的一些初始数据）   
+3.修改conf下配置文件，使之和你本地配置一致  
+4.分别切换到app的tcp_conn,ws_conn,logic目录下，执行go run main.go,启动TCP连接层服务器,WebSocket连接层服务器,逻辑层服务器  
 ### 业务服务器如何接入
 1.首先生成私钥和公钥  
 2.在app表里根据你的私钥添加一条app记录    
 3.将app_id和公钥保存到业务服务器  
 4.将用户通过LogicClientExtServer.AddUser接口添加到IM服务器  
-5.通过LogicClientExtServer.RegisterDevice接口初始化设备，获取设备id(device_id)  
+5.通过LogicClientExtServer.RegisterDevice接口注册设备，获取设备id(device_id)  
 6.将app_id，user_id,device_id用公钥通过公钥加密，生成token,相应库的代码在public/util/aes.go  
 7.接下来使用这个token，app就可以和IM服务器交互
+### rpc接口简介
+项目所有的proto协议在gim/public/proto/目录下  
+1.logic_client.ext.proto  
+对客户端（Android设备，IOS设备）提供的rpc协议  
+2.logic_server.ext.proto    
+对业务服务器提供的rpc协议  
+3.logic.int.proto  
+对conn服务层提供的rpc协议  
+4.conn.int.proto  
+对logic服务层提供的rpc协议  
 ### 项目目录介绍
 ```bash
 ├─ app # 服务启动入口
-│   ├── conn # 连接层启动入口
+│   ├── tcp_conn # TCP连接层启动入口
+|   ├── ws_conn # WebSocket连接层启动入口
 │   └── logic   # 逻辑层启动入口
 ├─ conf # 配置
-├─ conn # 连接层服务代码
+├─ tcp_conn # TCP连接层服务代码
+├─ ws_conn # WebSocket连接层服务代码
 ├─ ligic # 逻辑层服务代码
 ├─ public # 连接层和逻辑层公共代码
 ├─ sql # 数据库建表语句
@@ -47,10 +56,12 @@ gim是一个即时通讯服务器，代码全部使用golang完成。主要功�
 3.如果大于，返回一个完整包（此包内存复用），重复步骤2  
 4.如果小于，将buffer的有效字节前移，重复步骤1  
 ### 服务简介
-1.connect  
+1.tcp_conn  
 维持与客户端的TCP长连接，心跳，以及TCP拆包粘包，消息编解码  
+1.ws_conn  
+维持与客户端的WebSocket长连接，心跳，消息编解码  
 2.logic  
-消息转发逻辑，设备信息，用户信息，群组信息的操作
+消息转发逻辑，设备信息，用户信息，群组信息的操作  
 ### 离线消息同步
 用户的消息维护一个自增的序列号，当客户端TCP连接断开重新建立连接时，首先要做TCP长连接的登录，然后用客户端本地已经同步的最大的序列号做消息同步，这样就可以保证离线消息的不丢失。  
 ### 单用户多设备支持

@@ -1,13 +1,15 @@
-package conn
+package tcp_conn
 
 import (
 	"context"
 	"gim/conf"
+	"gim/public/grpclib"
 	"gim/public/logger"
 	"gim/public/pb"
+	"net"
+
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
-	"net"
 )
 
 type ConnIntServer struct{}
@@ -22,7 +24,7 @@ func (s *ConnIntServer) DeliverMessage(ctx context.Context, req *pb.DeliverMessa
 	}
 
 	// 发送消息
-	conn.Output(pb.PackageType_PT_MESSAGE, req.Message)
+	conn.Output(pb.PackageType_PT_MESSAGE, grpclib.GetCtxRequstId(ctx), nil, req.Message)
 	return &pb.DeliverMessageResp{}, nil
 }
 
@@ -35,7 +37,7 @@ func UnaryServerInterceptor(ctx context.Context, req interface{}, info *grpc.Una
 
 // StartRPCServer 启动rpc服务器
 func StartRPCServer() {
-	listener, err := net.Listen("tcp", conf.ConnRPCListenAddr)
+	listener, err := net.Listen("tcp", conf.ConnConf.RPCListenAddr)
 	if err != nil {
 		panic(err)
 	}
