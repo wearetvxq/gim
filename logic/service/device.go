@@ -1,11 +1,11 @@
 package service
 
 import (
-	"goim/logic/dao"
-	"goim/logic/model"
+	"gim/logic/dao"
+	"gim/logic/model"
 
-	"goim/public/imctx"
-	"goim/public/logger"
+	"gim/public/imctx"
+	"gim/public/logger"
 
 	"github.com/satori/go.uuid"
 )

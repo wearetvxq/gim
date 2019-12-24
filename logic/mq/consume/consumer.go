@@ -3,18 +3,18 @@ package consume
 import (
 	"time"
 
-	"goim/logic/dao"
-	"goim/logic/db"
-	"goim/logic/service"
-	"goim/public/imctx"
-	"goim/public/imerror"
-	"goim/public/lib"
-	"goim/public/logger"
-	"goim/public/transfer"
+	"gim/logic/dao"
+	"gim/logic/db"
+	"gim/logic/service"
+	"gim/public/imctx"
+	"gim/public/imerror"
+	"gim/public/lib"
+	"gim/public/logger"
+	"gim/public/transfer"
 
-	"goim/conf"
+	"gim/conf"
 
-	"goim/logic/mq/produce"
+	"gim/logic/mq/produce"
 
 	"github.com/json-iterator/go"
 	"github.com/nsqio/go-nsq"

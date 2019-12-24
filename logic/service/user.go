@@ -2,11 +2,11 @@ package service
 
 import (
 	"database/sql"
-	"goim/logic/dao"
-	"goim/logic/model"
-	"goim/public/imctx"
-	"goim/public/imerror"
-	"goim/public/logger"
+	"gim/logic/dao"
+	"gim/logic/model"
+	"gim/public/imctx"
+	"gim/public/imerror"
+	"gim/public/logger"
 )
 
 type userService struct{}

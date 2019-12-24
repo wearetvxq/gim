@@ -1,8 +1,8 @@
 package connect
 
 import (
-	"goim/logic/db"
-	"goim/public/imctx"
+	"gim/logic/db"
+	"gim/public/imctx"
 )
 
 func Context() *imctx.Context {

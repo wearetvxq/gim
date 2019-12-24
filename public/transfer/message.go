@@ -1,7 +1,7 @@
 package transfer
 
 import (
-	"goim/public/lib"
+	"gim/public/lib"
 	"time"
 )
 

@@ -1,7 +1,7 @@
 package lib
 
 import (
-	"goim/public/logger"
+	"gim/public/logger"
 
 	"github.com/json-iterator/go"
 )

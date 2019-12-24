@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"goim/conf"
-	"goim/connect"
-	"goim/public/logger"
+	"gim/conf"
+	"gim/connect"
+	"gim/public/logger"
 	"runtime"
 )
 

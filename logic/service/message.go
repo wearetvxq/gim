@@ -2,13 +2,13 @@ package service
 
 import (
 	"database/sql"
-	"goim/logic/dao"
-	"goim/logic/model"
-	"goim/logic/mq/produce"
-	"goim/public/imctx"
-	"goim/public/imerror"
-	"goim/public/logger"
-	"goim/public/transfer"
+	"gim/logic/dao"
+	"gim/logic/model"
+	"gim/logic/mq/produce"
+	"gim/public/imctx"
+	"gim/public/imerror"
+	"gim/public/logger"
+	"gim/public/transfer"
 )
 
 const (

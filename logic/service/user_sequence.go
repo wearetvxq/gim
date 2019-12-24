@@ -1,9 +1,9 @@
 package service
 
 import (
-	"goim/logic/dao"
-	"goim/public/imctx"
-	"goim/public/logger"
+	"gim/logic/dao"
+	"gim/public/imctx"
+	"gim/public/logger"
 )
 
 type userRequenceService struct{}

@@ -1,6 +1,6 @@
 package imctx
 
-import "goim/public/session"
+import "gim/public/session"
 
 type Context struct {
 	Session *session.Session

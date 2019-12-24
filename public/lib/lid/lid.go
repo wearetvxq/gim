@@ -2,7 +2,7 @@ package lid
 
 import (
 	"database/sql"
-	"goim/public/logger"
+	"gim/public/logger"
 	"time"
 )
 

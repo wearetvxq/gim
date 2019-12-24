@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"goim/conf"
-	"goim/logic/controller"
-	"goim/logic/mq/consume"
-	"goim/logic/rpc/server"
-	"goim/public/logger"
+	"gim/conf"
+	"gim/logic/controller"
+	"gim/logic/mq/consume"
+	"gim/logic/rpc/server"
+	"gim/public/logger"
 	"runtime"
 )
 

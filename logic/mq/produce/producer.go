@@ -2,10 +2,10 @@ package produce
 
 import (
 	"fmt"
-	"goim/conf"
-	"goim/logic/db"
-	"goim/public/logger"
-	"goim/public/transfer"
+	"gim/conf"
+	"gim/logic/db"
+	"gim/public/logger"
+	"gim/public/transfer"
 
 	"github.com/json-iterator/go"
 	"github.com/nsqio/go-nsq"

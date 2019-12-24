@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"goim/public/imctx"
-	"goim/public/logger"
+	"gim/public/imctx"
+	"gim/public/logger"
 )
 
 type deviceSendSequenceDao struct{}

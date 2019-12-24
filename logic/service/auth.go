@@ -2,9 +2,9 @@ package service
 
 import (
 	"database/sql"
-	"goim/logic/dao"
-	"goim/public/imctx"
-	"goim/public/imerror"
+	"gim/logic/dao"
+	"gim/public/imctx"
+	"gim/public/imerror"
 )
 
 type authService struct{}

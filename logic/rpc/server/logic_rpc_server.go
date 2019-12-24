@@ -2,12 +2,12 @@ package server
 
 import (
 	"database/sql"
-	"goim/logic/dao"
-	"goim/logic/db"
-	"goim/logic/service"
-	"goim/public/imctx"
-	"goim/public/logger"
-	"goim/public/transfer"
+	"gim/logic/dao"
+	"gim/logic/db"
+	"gim/logic/service"
+	"gim/public/imctx"
+	"gim/public/logger"
+	"gim/public/transfer"
 )
 
 func Context() *imctx.Context {

@@ -2,9 +2,9 @@ package service
 
 import (
 	"fmt"
-	"goim/logic/db"
-	"goim/logic/model"
-	"goim/public/imctx"
+	"gim/logic/db"
+	"gim/logic/model"
+	"gim/public/imctx"
 	"testing"
 )
 

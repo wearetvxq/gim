@@ -4,12 +4,12 @@ import (
 	"time"
 
 	"encoding/json"
-	"goim/public/lib"
-	"goim/public/logger"
-	"goim/public/pb"
-	"goim/public/transfer"
+	"gim/public/lib"
+	"gim/public/logger"
+	"gim/public/pb"
+	"gim/public/transfer"
 
-	"goim/conf"
+	"gim/conf"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/json-iterator/go"

@@ -1,16 +1,16 @@
 package client
 
 import (
-	"goim/connect"
-	"goim/public/pb"
+	"gim/connect"
+	"gim/public/pb"
 	"net"
 	"time"
 
 	"fmt"
 
-	"goim/public/lib"
+	"gim/public/lib"
 
-	"goim/public/transfer"
+	"gim/public/transfer"
 
 	"github.com/golang/protobuf/proto"
 )

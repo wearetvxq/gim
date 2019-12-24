@@ -1,12 +1,12 @@
 package client
 
 import (
-	"goim/connect"
-	"goim/public/pb"
+	"gim/connect"
+	"gim/public/pb"
 	"net"
 	"time"
 
-	"goim/public/logger"
+	"gim/public/logger"
 
 	"fmt"
 

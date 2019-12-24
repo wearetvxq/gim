@@ -2,17 +2,17 @@ package connect
 
 import (
 	"fmt"
-	"goim/public/logger"
-	"goim/public/pb"
-	"goim/public/transfer"
+	"gim/public/logger"
+	"gim/public/pb"
+	"gim/public/transfer"
 	"io"
 	"net"
 	"strings"
 	"time"
 
-	"goim/public/lib"
+	"gim/public/lib"
 
-	"goim/conf"
+	"gim/conf"
 
 	"github.com/golang/protobuf/proto"
 )

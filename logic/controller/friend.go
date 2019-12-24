@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"goim/logic/service"
+	"gim/logic/service"
 	"strconv"
 )
 

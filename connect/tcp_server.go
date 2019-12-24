@@ -2,7 +2,7 @@ package connect
 
 import (
 	"fmt"
-	"goim/public/logger"
+	"gim/public/logger"
 	"net"
 	"runtime"
 )

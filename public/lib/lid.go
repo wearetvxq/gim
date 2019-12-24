@@ -3,9 +3,9 @@ package lib
 import (
 	"database/sql"
 	"fmt"
-	"goim/conf"
-	"goim/public/lib/lid"
-	"goim/public/logger"
+	"gim/conf"
+	"gim/public/lib/lid"
+	"gim/public/logger"
 )
 
 var Lid *lid.Lid

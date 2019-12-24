@@ -1,9 +1,9 @@
 package db
 
 import (
-	"goim/public/session"
+	"gim/public/session"
 
-	"goim/conf"
+	"gim/conf"
 
 	_ "github.com/go-sql-driver/mysql"
 )

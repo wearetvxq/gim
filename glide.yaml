@@ -1,4 +1,4 @@
-package: goim
+package: gim
 import:
 - package: github.com/astaxie/beego
   version: ^1.11.1
