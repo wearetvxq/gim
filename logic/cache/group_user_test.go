@@ -2,10 +2,10 @@ package cache
 
 import (
 	"fmt"
-	"goim/logic/db"
-	"goim/logic/model"
-	"goim/public/imctx"
-	"goim/public/util"
+	"gim/logic/db"
+	"gim/logic/model"
+	"gim/public/imctx"
+	"gim/public/util"
 	"testing"
 )
 

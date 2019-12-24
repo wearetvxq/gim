@@ -2,9 +2,9 @@ package client
 
 import (
 	"encoding/base64"
-	"goim/connect"
-	"goim/public/pb"
-	"goim/public/util"
+	"gim/connect"
+	"gim/public/pb"
+	"gim/public/util"
 	"net"
 	"strconv"
 	"time"
@@ -66,7 +66,7 @@ func (c *TcpClient) SignIn() {
 		return
 	}
 
-	pack := connect.Package{Code: int(pb.PackageCode_PC_SIGN_IN_REQ), Content: signInBytes}
+	pack := connect.Package{Code: int(pb.PackageType_PT_SIGN_IN_REQ), Content: signInBytes}
 	c.codec.Encode(pack, 10*time.Second)
 }
 
@@ -76,7 +76,7 @@ func (c *TcpClient) SyncTrigger() {
 		fmt.Println(err)
 		return
 	}
-	err = c.codec.Encode(connect.Package{Code: int(pb.PackageCode_PC_SYNC_REQ), Content: bytes}, 10*time.Second)
+	err = c.codec.Encode(connect.Package{Code: int(pb.PackageType_PT_SYNC_REQ), Content: bytes}, 10*time.Second)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -85,7 +85,7 @@ func (c *TcpClient) SyncTrigger() {
 func (c *TcpClient) HeadBeat() {
 	ticker := time.NewTicker(time.Minute * 4)
 	for _ = range ticker.C {
-		err := c.codec.Encode(connect.Package{Code: int(pb.PackageCode_PC_HEARTBEAT_REQ), Content: []byte{}}, 10*time.Second)
+		err := c.codec.Encode(connect.Package{Code: int(pb.PackageType_PT_HEARTBEAT_REQ), Content: []byte{}}, 10*time.Second)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -118,8 +118,8 @@ func (c *TcpClient) Receive() {
 }
 
 func (c *TcpClient) HandlePackage(pack connect.Package) error {
-	switch pb.PackageCode(pack.Code) {
-	case pb.PackageCode_PC_SIGN_IN_RESP:
+	switch pb.PackageType(pack.Code) {
+	case pb.PackageType_PT_SIGN_IN_RESP:
 		resp := pb.SignInResp{}
 		err := proto.Unmarshal(pack.Content, &resp)
 		if err != nil {
@@ -127,9 +127,9 @@ func (c *TcpClient) HandlePackage(pack connect.Package) error {
 			return err
 		}
 		fmt.Println(Json(resp))
-	case pb.PackageCode_PC_HEARTBEAT_RESP:
+	case pb.PackageType_PT_HEARTBEAT_RESP:
 		fmt.Println("心跳响应")
-	case pb.PackageCode_PC_SYNC_RESP:
+	case pb.PackageType_PT_SYNC_RESP:
 		fmt.Println("离线消息同步开始------")
 
 		syncResp := pb.SyncResp{}
@@ -141,17 +141,17 @@ func (c *TcpClient) HandlePackage(pack connect.Package) error {
 		fmt.Println("离线消息同步响应:code", syncResp.Code, "message:", syncResp.Code)
 		for _, msg := range syncResp.Messages {
 			if msg.ReceiverType == pb.ReceiverType_RT_USER {
-				fmt.Println("单聊消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+				fmt.Println("单聊消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 			}
 			if msg.ReceiverType == pb.ReceiverType_RT_NORMAL_GROUP {
-				fmt.Println("小群消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+				fmt.Println("小群消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 			}
 			if msg.ReceiverType == pb.ReceiverType_RT_LARGE_GROUP {
-				fmt.Println("大群消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+				fmt.Println("大群消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 			}
 		}
 		fmt.Println("离线消息同步结束------")
-	case pb.PackageCode_PC_MESSAGE:
+	case pb.PackageType_PT_MESSAGE:
 		message := pb.Message{}
 		err := proto.Unmarshal(pack.Content, &message)
 		if err != nil {
@@ -161,13 +161,13 @@ func (c *TcpClient) HandlePackage(pack connect.Package) error {
 
 		msg := message.Message
 		if msg.ReceiverType == pb.ReceiverType_RT_USER {
-			fmt.Println("单聊消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+			fmt.Println("单聊消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 		}
 		if msg.ReceiverType == pb.ReceiverType_RT_NORMAL_GROUP {
-			fmt.Println("小群消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+			fmt.Println("小群消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 		}
 		if msg.ReceiverType == pb.ReceiverType_RT_LARGE_GROUP {
-			fmt.Println("大群消息：发送者：", msg.SenderId, "接收者:", msg.SenderId, "内容:", msg.MessageBody.MessageContent.GetText())
+			fmt.Println("大群消息：发送者：", msg.SenderId, "接收者:", msg.ReceiverId, "内容:", msg.MessageBody.MessageContent.GetText())
 		}
 
 		ack := pb.MessageACK{
@@ -182,7 +182,7 @@ func (c *TcpClient) HandlePackage(pack connect.Package) error {
 		}
 
 		c.Seq = msg.Seq
-		err = c.codec.Encode(connect.Package{Code: int(pb.PackageCode_PC_MESSAGE_ACK), Content: ackBytes}, 10*time.Second)
+		err = c.codec.Encode(connect.Package{Code: int(pb.PackageType_PT_MESSAGE_ACK), Content: ackBytes}, 10*time.Second)
 		if err != nil {
 			fmt.Println(err)
 			return err

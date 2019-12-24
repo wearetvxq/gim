@@ -3,7 +3,7 @@ package dao
 import (
 	"encoding/json"
 	"fmt"
-	"goim/logic/model"
+	"gim/logic/model"
 	"testing"
 	"time"
 )

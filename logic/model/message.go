@@ -36,7 +36,7 @@ type Message struct {
 // 发送消息请求
 type SendMessage struct {
 	ReceiverType pb.ReceiverType `json:"receiver_type"`
-	ReceiverId   int64           `json:"receiver_id"`
+	ReceiverId   int64           `json:"receiver_id"` //这个是什么啊
 	ToUserIds    []int64         `json:"to_user_ids"`
 	MessageId    string          `json:"message_id"`
 	SendTime     int64           `json:"send_time"`
