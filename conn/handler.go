@@ -59,6 +59,7 @@ func (*handler) SignIn(ctx *ConnContext, bytes []byte) {
 
 	s, _ := status.FromError(err)
 	ctx.Output(pb.PackageType_PT_SIGN_IN, &pb.SignInOutput{Code: int32(s.Code()), Message: s.Message()})
+	logger.Logger.Info("这里 发送rpc后还能拿回来信息")
 	if s.Code() != codes.OK {
 		ctx.Release()
 		return

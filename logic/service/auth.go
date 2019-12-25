@@ -39,6 +39,15 @@ func (*authService) Auth(ctx *imctx.Context, appId, userId, deviceId int64, toke
 // VerifySecretKey 对用户秘钥进行校验
 func (*authService) VerifyToken(ctx *imctx.Context, appId, userId, deviceId int64, token string) error {
 	app, err := AppService.Get(ctx, appId)
+	if app.PrivateKey==util.PrivateKey{
+		logger.Logger.Info("私钥是一样的啊！！！！！！！！！！")
+	}else {
+		logger.Logger.Info(app.PrivateKey)
+		logger.Logger.Info("下面这个是空？")
+		logger.Logger.Info(util.PrivateKey)
+		logger.Logger.Info("私钥不一样的啊！！！！！！！！！！")
+	}
+
 	if err != nil {
 		logger.Sugar.Error(err)
 		return err

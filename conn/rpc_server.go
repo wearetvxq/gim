@@ -29,6 +29,7 @@ func (s *ConnIntServer) DeliverMessage(ctx context.Context, req *pb.DeliverMessa
 // UnaryServerInterceptor 服务器端的单向调用的拦截器
 func UnaryServerInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	resp, err := handler(ctx, req)
+	logger.Logger.Info("这个拦截器中间件应该就只是用来打印的吧")
 	logger.Logger.Debug("interceptor", zap.Any("info", info), zap.Any("req", req), zap.Any("resp", resp))
 	return resp, err
 }

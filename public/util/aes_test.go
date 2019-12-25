@@ -7,7 +7,7 @@ import (
 
 // appId:user_id:device_id:expire token格式
 func TestRsaEncrypt(t *testing.T) {
-	token, err := GetToken(1000000000000000, 100000000000000000, 100000000000000000, 1000000000000000, PublicKey)
+	token, err := GetToken(1, 1, 1, 1000000000000000, PublicKey)
 	fmt.Println(err)
 	fmt.Println(token)
 	fmt.Println(len(token))

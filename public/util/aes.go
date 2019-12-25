@@ -84,6 +84,7 @@ func RsaDecrypt(ciphertext []byte, privateKey []byte) ([]byte, error) {
 	//解密
 	block, _ := pem.Decode(privateKey)
 	if block == nil {
+		//这里直接除了key error
 		return nil, errors.New("private key error!")
 	}
 	//解析PKCS1格式的私钥
@@ -96,6 +97,8 @@ func RsaDecrypt(ciphertext []byte, privateKey []byte) ([]byte, error) {
 }
 
 // PrivateKey 公钥
+
+
 var PrivateKey = `
 -----BEGIN RSA PRIVATE KEY-----
 MIICWwIBAAKBgQDcGsUIIAINHfRTdMmgGwLrjzfMNSrtgIf4EGsNaYwmC1GjF/bM

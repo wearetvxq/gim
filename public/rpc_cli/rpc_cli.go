@@ -16,6 +16,7 @@ var (
 )
 
 func InitLogicIntClient() {
+	logger.Logger.Info("实例化conn的logic cli  50000")
 	conn, err := grpc.DialContext(context.TODO(), conf.LogicRPCAddrs, grpc.WithInsecure())
 	if err != nil {
 		logger.Sugar.Error(err)
@@ -26,6 +27,8 @@ func InitLogicIntClient() {
 }
 
 func InitConnIntClient() {
+	logger.Logger.Info("实例化conn的conn cli 60000")
+
 	conn, err := grpc.DialContext(context.TODO(), conf.ConnRPCAddrs, grpc.WithInsecure(),
 		grpc.WithDefaultServiceConfig(fmt.Sprintf(`{"LoadBalancingPolicy": "%s"}`, grpclib.Name)))
 	if err != nil {
