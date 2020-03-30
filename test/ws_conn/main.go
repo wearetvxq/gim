@@ -2,20 +2,18 @@ package main
 
 import (
 	"fmt"
-	"gim/public/grpclib"
-	"gim/public/pb"
-	"gim/public/util"
+	"gim/pkg/grpclib"
+	"gim/pkg/pb"
+	"gim/pkg/util"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
 	"time"
 
-	jsoniter "github.com/json-iterator/go"
-
-	"github.com/gorilla/websocket"
-
 	"github.com/golang/protobuf/proto"
+	"github.com/gorilla/websocket"
+	jsoniter "github.com/json-iterator/go"
 )
 
 func main() {
@@ -40,7 +38,7 @@ type WSClient struct {
 }
 
 func (c *WSClient) Start() {
-	u := url.URL{Scheme: "ws", Host: "localhost:8080", Path: "/ws"}
+	u := url.URL{Scheme: "ws", Host: "localhost:8081", Path: "/ws"}
 
 	header := http.Header{}
 	header.Set(grpclib.CtxAppId, strconv.FormatInt(c.AppId, 10))
