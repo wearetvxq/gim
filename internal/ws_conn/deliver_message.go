@@ -15,7 +15,7 @@ func DeliverMessage(ctx context.Context, req *pb.DeliverMessageReq) error {
 		return nil
 	}
 
-	// 发送消息
+	// 发送消息  没有读chan 和写chan  只有读for 循环 和 写调用
 	conn.Output(pb.PackageType_PT_MESSAGE, grpclib.GetCtxRequstId(ctx), nil, req.Message)
 	return nil
 }

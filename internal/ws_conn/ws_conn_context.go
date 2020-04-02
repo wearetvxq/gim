@@ -36,7 +36,7 @@ func NewWSConnContext(conn *websocket.Conn, appId, userId, deviceId int64) *WSCo
 	}
 }
 
-// DoConn 处理连接
+// DoConn 处理连接     这里就是 ping 和 read   而且直接 ws 也是用pb么?
 func (c *WSConnContext) DoConn() {
 	defer util.RecoverPanic()
 

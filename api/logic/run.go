@@ -11,6 +11,7 @@ import (
 
 // StartRpcServer 启动rpc服务
 func StartRpcServer() {
+	//内部conn 连接调用  只做 消息传递这种业务
 	go func() {
 		defer util.RecoverPanic()
 
@@ -26,6 +27,7 @@ func StartRpcServer() {
 		}
 	}()
 
+	// 对client 提供的 业务 api
 	go func() {
 		defer util.RecoverPanic()
 
@@ -41,6 +43,7 @@ func StartRpcServer() {
 		}
 	}()
 
+	//对接入server 提供的业务api
 	go func() {
 		defer util.RecoverPanic()
 

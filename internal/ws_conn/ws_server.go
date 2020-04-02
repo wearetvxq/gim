@@ -24,7 +24,7 @@ var upgrader = websocket.Upgrader{
 		return true
 	},
 }
-
+// 看看他这个 ws 的handler 怎么处理的
 func wsHandler(w http.ResponseWriter, r *http.Request) {
 	appId, _ := strconv.ParseInt(r.Header.Get(grpclib.CtxAppId), 10, 64)
 	userId, _ := strconv.ParseInt(r.Header.Get(grpclib.CtxUserId), 10, 64)
@@ -66,6 +66,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		logger.Sugar.Error(err)
 		return
 	}
+	//这个conn 怎么管理的
 
 	// 断开这个设备之前的连接
 	preCtx := load(deviceId)

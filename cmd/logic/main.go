@@ -17,6 +17,7 @@ func main() {
 	util.InitUID(db.DBCli)
 
 	// 初始化RpcClient
+	logger.Logger.Info(config.LogicConf.ConnRPCAddrs)
 	rpc_cli.InitConnIntClient(config.LogicConf.ConnRPCAddrs)
 
 	logic.StartRpcServer()
