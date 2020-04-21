@@ -2,6 +2,7 @@ package main
 
 import (
 	"gim/api/logic"
+	"gim/api/controller"
 	"gim/config"
 	"gim/internal/logic/db"
 	"gim/pkg/logger"
@@ -22,5 +23,13 @@ func main() {
 
 	logic.StartRpcServer()
 	logger.Logger.Info("logic server start")
+
+	// 启动web容器
+	err := controller.Engine.Run(config.LogicConf.LogicHTTPListenIP)
+	if err != nil {
+		logger.Sugar.Error(err)
+	}
+
+
 	select {}
 }

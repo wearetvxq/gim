@@ -79,6 +79,8 @@ func TestLogicExtServer_GetUser(t *testing.T) {
 	logger.Sugar.Info(resp)
 }
 
+// tcp 的 接收者类型是 1 ws的接受者类型也是1  只区分用户 组群
+//发送者类型：这个就是2  有请求id  测试的发送者是2  所以2 不能和2 发 刚才测了才没消息
 func TestLogicExtServer_SendMessage(t *testing.T) {
 	resp, err := getLogicExtClient().SendMessage(getCtx(),
 		&pb.SendMessageReq{

@@ -28,12 +28,13 @@ func getServerCtx() context.Context {
 	return metadata.NewOutgoingContext(context.TODO(), metadata.Pairs("app_id", "1", "user_id", "0", "device_id", "0", "token", token))
 }
 
+//SenderType_ST_BUSINESS server的发送类型的3
 func TestLogicServerExtServer_SendMessage(t *testing.T) {
 	resp, err := getLogicServerExtClient().SendMessage(getServerCtx(),
 		&pb.SendMessageReq{
 			MessageId:    "11111",
 			ReceiverType: pb.ReceiverType_RT_USER,
-			ReceiverId:   1,
+			ReceiverId:   2,  //这个确实是user_id   以及 这个确实是 server 就只有发消息 用im的用户体系
 			ToUserIds:    nil,
 			MessageBody: &pb.MessageBody{
 				MessageType: pb.MessageType_MT_TEXT,

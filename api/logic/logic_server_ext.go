@@ -10,6 +10,9 @@ import (
 
 type LogicServerExtServer struct{}
 
+
+// 业务服务的话 就只需要有 appid 的请求头
+
 // SendMessage 发送消息
 func (*LogicServerExtServer) SendMessage(ctx context.Context, in *pb.SendMessageReq) (*pb.SendMessageResp, error) {
 	appId, err := grpclib.GetCtxAppId(ctx)

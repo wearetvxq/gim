@@ -265,3 +265,5 @@ func (*messageService) SendToDevice(ctx context.Context, device model.Device, ms
 	// todo 其他推送厂商
 	return nil
 }
+
+//ws的新的一套的版本里 就是要 用新的service 里面会有 设备的连接是ws 还是tcp  所以还是必须改的啊 而且 新版本的消息体 应该更合理一点

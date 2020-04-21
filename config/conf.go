@@ -15,6 +15,7 @@ type logicConf struct {
 	ClientRPCExtListenAddr string
 	ServerRPCExtListenAddr string
 	ConnRPCAddrs           string
+	LogicHTTPListenIP      string
 }
 
 // conn配置

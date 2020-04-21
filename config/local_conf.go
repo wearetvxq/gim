@@ -15,6 +15,7 @@ func initLocalConf() {
 		ClientRPCExtListenAddr: ":50001",
 		ServerRPCExtListenAddr: ":50002",
 		ConnRPCAddrs:           "addrs:///127.0.0.1:60000,127.0.0.1:60001",
+		LogicHTTPListenIP:      "127.0.0.1:8000",
 	}
 
 	ConnConf = connConf{
