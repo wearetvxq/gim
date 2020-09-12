@@ -480,9 +480,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LogicIntClient interface {
+	//  消息同步
 	//  登录
 	SignIn(ctx context.Context, in *SignInReq, opts ...grpc.CallOption) (*SignInResp, error)
-	//  消息同步
 	Sync(ctx context.Context, in *SyncReq, opts ...grpc.CallOption) (*SyncResp, error)
 	//  设备收到消息回执
 	MessageACK(ctx context.Context, in *MessageACKReq, opts ...grpc.CallOption) (*MessageACKResp, error)

@@ -36,6 +36,8 @@ type TcpClient struct {
 	codec    *tcp_conn.Codec
 }
 
+
+//发数据 Encode
 func (c *TcpClient) Output(pt pb.PackageType, requestId int64, message proto.Message) {
 	var input = pb.Input{
 		Type:      pt,
@@ -106,6 +108,7 @@ func (c *TcpClient) Heartbeat() {
 
 func (c *TcpClient) Receive() {
 	for {
+		// 就从这里读数据到 c.ReadBuf
 		_, err := c.codec.Read()
 		if err != nil {
 			fmt.Println(err)
@@ -114,6 +117,8 @@ func (c *TcpClient) Receive() {
 
 		for {
 			bytes, ok, err := c.codec.Decode()
+			logger.Sugar.Info(bytes)
+			//这里直接是到pb 的byte
 			if err != nil {
 				fmt.Println(err)
 				return

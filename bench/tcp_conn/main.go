@@ -105,6 +105,10 @@ func (c *TcpClient) SyncTrigger() {
 func (c *TcpClient) Heartbeat() {
 	ticker := time.NewTicker(time.Minute * 5)
 	for range ticker.C {
+		//ack := pb.MessageACK{
+		//	DeviceAck:   1223422,
+		//	ReceiveTime: util.UnixMilliTime(time.Now()),
+		//}
 		c.Output(pb.PackageType_PT_HEARTBEAT, time.Now().UnixNano(), nil)
 	}
 }

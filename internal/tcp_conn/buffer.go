@@ -3,6 +3,7 @@ package tcp_conn
 import (
 	"errors"
 	"io"
+	"gim/pkg/logger"
 )
 
 var (
@@ -30,6 +31,9 @@ func (b *buffer) grow() {
 	if b.start == 0 {
 		return
 	}
+	logger.Sugar.Info(b.start)
+	logger.Sugar.Info(b.buf)
+	logger.Sugar.Info(b.end)
 	copy(b.buf, b.buf[b.start:b.end])
 	b.end -= b.start
 	b.start = 0
@@ -39,6 +43,7 @@ func (b *buffer) grow() {
 func (b *buffer) readFromReader(reader io.Reader) (int, error) {
 	b.grow()
 	n, err := reader.Read(b.buf[b.end:])
+	// 不停的 读到 b.buf 里面吗?
 	if err != nil {
 		return n, err
 	}
@@ -49,6 +54,8 @@ func (b *buffer) readFromReader(reader io.Reader) (int, error) {
 // seek 返回n个字节，而不产生移位，如果没有足够字节，返回错误
 func (b *buffer) seek(start, end int) ([]byte, error) {
 	if b.end-b.start >= end-start {
+		// 如果 传输的数据 大于 读取限制
+		// 这个是长度的两个直接
 		buf := b.buf[b.start+start : b.start+end]
 		return buf, nil
 	}

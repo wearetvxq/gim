@@ -66,7 +66,6 @@ func (c *WSClient) Start() {
 	fmt.Println(string(bytes))
 	c.Conn = conn
 
-	c.SyncTrigger()
 	go c.Heartbeat()
 	go c.Receive()
 }
@@ -98,7 +97,7 @@ func (c *WSClient) Output(pt pb.PackageType, requestId int64, message proto.Mess
 	}
 }
 
-func (c *WSClient) SyncTrigger() {
+func (c *WSClient) Login() {
 	c.Output(pb.PackageType_PT_SYNC, time.Now().UnixNano(), &pb.SyncInput{Seq: c.Seq})
 }
 

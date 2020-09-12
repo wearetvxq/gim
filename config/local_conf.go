@@ -8,7 +8,7 @@ import (
 
 func initLocalConf() {
 	LogicConf = logicConf{
-		MySQL:                  "root:Gau43mL9_ff@tcp(localhost:3306)/wsgim?charset=utf8&parseTime=true",
+		MySQL:                  "root:Gau43mL9_ff@tcp(localhost:3307)/wsgim?charset=utf8&parseTime=true",
 		NSQIP:                  "127.0.0.1:4150",  // 又开始用nsq了??
 		RedisIP:                "127.0.0.1:6379",
 		RPCIntListenAddr:       ":50000",

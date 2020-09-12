@@ -63,6 +63,7 @@ func (f *CodecFactory) GetCodec(conn net.Conn) *Codec {
 
 // Read 从conn里面读取数据，当conn发生阻塞，这个方法也会阻塞
 func (c *Codec) Read() (int, error) {
+	//conn 实现了 reader 方法  所以就能读取吗
 	return c.ReadBuf.readFromReader(c.Conn)
 }
 
@@ -72,7 +73,7 @@ func (c *Codec) Read() (int, error) {
 func (c *Codec) Decode() ([]byte, bool, error) {
 	var err error
 	// 读取数据长度
-	lenBuf, err := c.ReadBuf.seek(0, c.f.LenLen)
+	lenBuf, err := c.ReadBuf.seek(0, c.f.LenLen) //这里是可以动态配置的
 	if err != nil {
 		return nil, false, nil
 	}
@@ -103,10 +104,12 @@ func (c *Codec) Encode(bytes []byte, duration time.Duration) error {
 		defer c.f.WriteBufferPool.Put(bufferCache)
 	} else {
 		buffer = make([]byte, c.f.LenLen+len(bytes))
+		//这里长度  超过了呢? 就不用cache bufferCache
 	}
 
 	// 将消息长度写入buffer
 	binary.BigEndian.PutUint16(buffer[0:c.f.LenLen], uint16(len(bytes)))
+	//就是这里写长度的啊
 	// 将消息内容内容写入buffer
 	copy(buffer[c.f.LenLen:], bytes)
 
